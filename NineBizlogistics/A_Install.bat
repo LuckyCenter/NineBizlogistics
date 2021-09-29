@@ -1,0 +1,1 @@
+nssm install NineBizlogistics

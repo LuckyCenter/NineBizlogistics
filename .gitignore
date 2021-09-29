@@ -1,0 +1,12 @@
+# compiled files
+obj
+bin
+.cache
+.vs
+.xml
+
+# user files
+.user
+.suo
+properties
+web
