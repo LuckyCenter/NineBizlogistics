@@ -16,6 +16,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace NineBizlogistics
 {
@@ -81,6 +82,12 @@ namespace NineBizlogistics
                 option.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(Startup).Assembly.GetName().Name}.xml"), true);
             });
             services.AddRouting();
+            //×¢²áÑ¹ËõÏìÓ¦
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +99,9 @@ namespace NineBizlogistics
             }
 
             app.UseRouting();
+
+            //Ê¹ÓÃgzipÑ¹Ëõ
+            app.UseResponseCompression();
 
             app.UseSwagger();
             app.UseSwaggerUI(option =>
